@@ -96,7 +96,7 @@ else if (command == "doinsert4096") {
     var TimeToDoInsert4096 = [];
     var IndexOfDoInsert4096 = [];
     for (i = 0; i < 4096; i++){
-        listBooks();
+        insertBook('a','b');
         TimeToDoInsert4096.push(Date.now()/1000);
         IndexOfDoInsert4096.push(i);
     }
@@ -108,11 +108,17 @@ else if (command == "doget4096") {
     var TimeToDoGet4096 = [];
     var IndexOfDoGet4096 = [];
     for (i = 0; i < 4096; i++){
-        listBooks();
+        getBook(i);
         TimeToDoGet4096.push(Date.now()/1000);
         IndexOfDoGet4096.push(i);
     }
 }
+
+// else if (command == "checktime"){
+//     for (i = 0; i < 10; i++) {
+//         console.log(TimeToDoGet4096[i]);
+//     } 
+// }
 
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
