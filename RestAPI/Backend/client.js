@@ -55,16 +55,24 @@ else if (command == "looplist"){
     console.log(stop-start);
 }
 
-else if (command == "insert") {
-    var xaxis = [];
-    var time = [];
+else if (command == "insert"){
+    var TimeToInsertOne =[]
+    var StartTimeForInsertOne = Date.now();
+    insertBook('a', 'b');
+    var EndTimeForInsertOne = Date.now();
+    TimeToInsertOne.push((EndTimeForInsertOne-StartTimeForInsertOne)/1000)
+    console.log(TimeToInsertOne);
+}
+
+else if (command == "listinsert") {
+    var TimeToInsertList = [];
+    var StartTimeForInsertList = Date.now();
     for (i = 0; i < 100; i++){
         insertBook('a', 'b');
-        xaxis.push(i);
-        time.push(Date.now());
     }
-    console.log(xaxis);
-    console.log(time); 
+    var EndTimeForInsertList = Date.now();
+    TimeToInsertList.push((EndTimeForInsertList-StartTimeForInsertList)/1000)
+    console.log(TimeToInsertList); 
 }
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
