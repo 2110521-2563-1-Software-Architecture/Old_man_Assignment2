@@ -1,5 +1,6 @@
 const axios = require('axios');
 const io = require("socket.io-client");
+const plotlib = require('nodeplotlib');
 const URL = 'http://localhost:3000';
 
 var processName = process.argv.shift();
@@ -123,3 +124,8 @@ else if (command == "doget4096") {
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
 else if (command == "watch") watchBooks();
+
+else if (command == "plot") {                                           //HowToPlotGraph
+    data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
+    plotlib.plot(data);
+}
