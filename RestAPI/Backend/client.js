@@ -45,6 +45,7 @@ const watchBooks = async () => {
 }
 
 if (command == "list") listBooks();
+
 //try doing loop 
 else if (command == "looplist"){
     var start = Date.now()/1000;
@@ -55,6 +56,7 @@ else if (command == "looplist"){
     console.log(stop-start);
 }
 
+//Use this command to insert a book in ข้อa)
 else if (command == "insert"){
     var TimeToInsertOne =[]
     var StartTimeForInsertOne = Date.now();
@@ -64,6 +66,7 @@ else if (command == "insert"){
     console.log(TimeToInsertOne);
 }
 
+//Use this command to insert many books in ข้อa)
 else if (command == "listinsert") {
     var TimeToInsertList = [];
     var StartTimeForInsertList = Date.now();
@@ -74,6 +77,43 @@ else if (command == "listinsert") {
     TimeToInsertList.push((EndTimeForInsertList-StartTimeForInsertList)/1000)
     console.log(TimeToInsertList); 
 }
+
+//Use this command to list 4096 rounds in ข้อb)
+//Call this in terminal1
+else if (command == "dolist4096") {
+    var TimeToDoList4096 = [];
+    var IndexOfDoList4096 = [];
+    for (i = 0; i < 4096; i++){
+        listBooks();
+        TimeToDoList4096.push(Date.now()/1000);
+        IndexOfDoList4096.push(i);
+    }
+}
+
+//Use this command to insert 4096 rounds in ข้อb)
+//Call this in terminal2
+else if (command == "doinsert4096") {
+    var TimeToDoInsert4096 = [];
+    var IndexOfDoInsert4096 = [];
+    for (i = 0; i < 4096; i++){
+        listBooks();
+        TimeToDoInsert4096.push(Date.now()/1000);
+        IndexOfDoInsert4096.push(i);
+    }
+}
+
+//Use this command to get 4096 rounds in ข้อb)
+//Call this in terminal3
+else if (command == "doget4096") {
+    var TimeToDoGet4096 = [];
+    var IndexOfDoGet4096 = [];
+    for (i = 0; i < 4096; i++){
+        listBooks();
+        TimeToDoGet4096.push(Date.now()/1000);
+        IndexOfDoGet4096.push(i);
+    }
+}
+
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
 else if (command == "watch") watchBooks();
