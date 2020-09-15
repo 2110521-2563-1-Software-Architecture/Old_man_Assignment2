@@ -55,7 +55,17 @@ else if (command == "looplist"){
     console.log(stop-start);
 }
 
-else if (command == "insert") insertBook(process.argv[0], process.argv[1]);
+else if (command == "insert") {
+    var xaxis = [];
+    var time = [];
+    for (i = 0; i < 100; i++){
+        insertBook('a', 'b');
+        xaxis.push(i);
+        time.push(Date.now());
+    }
+    console.log(xaxis);
+    console.log(time); 
+}
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
 else if (command == "watch") watchBooks();
