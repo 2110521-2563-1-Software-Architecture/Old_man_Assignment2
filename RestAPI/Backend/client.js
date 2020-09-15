@@ -45,11 +45,16 @@ const watchBooks = async () => {
 }
 
 if (command == "list") listBooks();
+//try doing loop 
 else if (command == "looplist"){
-    for ( i = 0; i < 5; i++){
+    var start = Date.now()/1000;
+    for ( i = 0; i < 100; i++){
         listBooks()
     }
+    var stop = Date.now()/1000;
+    console.log(stop-start);
 }
+
 else if (command == "insert") insertBook(process.argv[0], process.argv[1]);
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
