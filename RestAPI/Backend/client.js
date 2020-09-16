@@ -132,6 +132,21 @@ else if (command == "doget4096") {
 //         console.log(TimeToDoGet4096[i]);
 //     } 
 // }
+else if (command == "concurrentlist") {  
+    const square = [
+        1,2,4,8,16,32,64,128,256,512,1024,2048,4096
+    ];
+    const time = []
+    for (i = 0; i < square.length; i++){
+        var start = Date.now();
+        for (j = 0; j < square[i]; j++){
+            listBooks();
+        }
+        var end = Date.now();
+        time.push(end-start);
+    }
+    console.log(time);
+}
 
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
