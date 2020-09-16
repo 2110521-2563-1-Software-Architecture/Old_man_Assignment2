@@ -6,8 +6,8 @@ const URL = 'http://localhost:3000';
 var processName = process.argv.shift();
 var scriptName = process.argv.shift();
 var command = process.argv.shift();
-var TimeToDoList4096 = [];
-var IndexOfDoList4096 = [];
+var fs = require('fs');
+
 
 const listBooks = async () => {
     const res = await axios.get(`${URL}/list`);
@@ -84,13 +84,28 @@ else if (command == "listinsert") {
 //Use this command to list 4096 rounds in ข้อb)
 //Call this in terminal1
 else if (command == "dolist4096") {
+
+    var TimeToDoList4096 = [];
+    var IndexOfDoList4096 = [];
     
     for (i = 0; i < 4096; i++){
         listBooks();
         TimeToDoList4096.push(Date.now()/1000);
         IndexOfDoList4096.push(i);
     }
-    console.log(IndexOfDoList4096);
+    
+    fs.writeFile('TimeToDoList4096.txt', TimeToDoList4096[0]+',', function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
+
+    for (i = 1; i < 4096; i++){
+        fs.appendFile('TimeToDoList4096.txt', TimeToDoList4096[i]+',', function (err) {
+            if (err) throw err;
+            console.log('Saved!');
+          });
+       
+    }
 }
 
 //Use this command to insert 4096 rounds in ข้อb)
