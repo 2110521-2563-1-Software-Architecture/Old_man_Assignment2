@@ -1,13 +1,12 @@
 const axios = require('axios');
 const io = require("socket.io-client");
 const plotlib = require('nodeplotlib');
+const fs = require('fs');
 const URL = 'http://localhost:3000';
 
 var processName = process.argv.shift();
 var scriptName = process.argv.shift();
 var command = process.argv.shift();
-var fs = require('fs');
-
 
 const listBooks = async () => {
     const res = await axios.get(`${URL}/list`);
@@ -51,85 +50,81 @@ if (command == "list") listBooks();
 
 //try doing loop 
 else if (command == "looplist"){
-    var start = Date.now()/1000;
+    let start = Date.now();
     for ( i = 0; i < 100; i++){
-        listBooks()
+        listBooks();
     }
-    var stop = Date.now()/1000;
-    console.log(stop-start);
+    fs.writeFile('LoopList.txt', (Date.now() - start).toString(), function (err) {
+        if (err) throw err;
+        console.log('LoopList saved');
+    });
 }
 
 //Use this command to insert a book in ข้อa)
 else if (command == "insert"){
-    var TimeToInsertOne =[]
-    var StartTimeForInsertOne = Date.now();
+    let start = Date.now();
     insertBook('a', 'b');
-    var EndTimeForInsertOne = Date.now();
-    TimeToInsertOne.push((EndTimeForInsertOne-StartTimeForInsertOne)/1000)
-    console.log(TimeToInsertOne);
+    fs.writeFile('InsertOne.txt', (Date.now() - start).toString(), function (err) {
+        if (err) throw err;
+        console.log('InsertOne saved');
+    });
 }
 
 //Use this command to insert many books in ข้อa)
 else if (command == "listinsert") {
-    var TimeToInsertList = [];
-    var StartTimeForInsertList = Date.now();
+    let start = Date.now();
     for (i = 0; i < 100; i++){
         insertBook('a', 'b');
     }
-    var EndTimeForInsertList = Date.now();
-    TimeToInsertList.push((EndTimeForInsertList-StartTimeForInsertList)/1000)
-    console.log(TimeToInsertList); 
+    fs.writeFile('ListInsert.txt', (Date.now() - start).toString(), function (err) {
+        if (err) throw err;
+        console.log('ListInsert saved');
+    });
 }
 
 //Use this command to list 4096 rounds in ข้อb)
 //Call this in terminal1
-else if (command == "dolist4096") {
-
-    var TimeToDoList4096 = [];
-    var IndexOfDoList4096 = [];
-    
+else if (command == "dolist4096") {  
+    let data = '';
+    let start = Date.now()
     for (i = 0; i < 4096; i++){
         listBooks();
-        TimeToDoList4096.push(Date.now()/1000);
-        IndexOfDoList4096.push(i);
+        data += (Date.now() - start).toString() + '\n';
     }
-    
-    fs.writeFile('TimeToDoList4096.txt', TimeToDoList4096[0]+',', function (err) {
+    fs.writeFile('list4096.txt', data, function (err) {
         if (err) throw err;
-        console.log('Saved!');
-      });
-
-    for (i = 1; i < 4096; i++){
-        fs.appendFile('TimeToDoList4096.txt', TimeToDoList4096[i]+',', function (err) {
-            if (err) throw err;
-            console.log('Saved!');
-          });
-       
-    }
+        console.log('List4096 saved');
+    });
 }
 
 //Use this command to insert 4096 rounds in ข้อb)
 //Call this in terminal2
 else if (command == "doinsert4096") {
-    var TimeToDoInsert4096 = [];
-    var IndexOfDoInsert4096 = [];
+    let data = '';
+    let start = Date.now()
     for (i = 0; i < 4096; i++){
         insertBook('a','b');
-        TimeToDoInsert4096.push(Date.now()/1000);
-        IndexOfDoInsert4096.push(i);
+        data += (Date.now() - start).toString() + '\n';
     }
+    fs.writeFile('insert4096.txt', data, function (err) {
+        if (err) throw err;
+        console.log('Insert4096 saved');
+    });
 }
 
 //Use this command to get 4096 rounds in ข้อb)
 //Call this in terminal3
 else if (command == "doget4096") {
-    var TimeToDoGet4096 = [];
-    var IndexOfDoGet4096 = [];
+    let data = '';
+    let start = Date.now()
     for (i = 0; i < 4096; i++){
         getBook(i);
-        TimeToDoGet4096.push(Date.now()/1000);
-        IndexOfDoGet4096.push(i);
+        data += (Date.now() - start).toString() + '\n';
     }
+    fs.writeFile('get4096.txt', data, function (err) {
+        if (err) throw err;
+        console.log('Get4096 saved');
+    });
 }
 
 // else if (command == "checktime"){
@@ -141,12 +136,3 @@ else if (command == "doget4096") {
 else if (command == "get") getBook(process.argv[0]);
 else if (command == "delete") deleteBook(process.argv[0]);
 else if (command == "watch") watchBooks();
-
-else if (command == "plot") {                                           //HowToPlotGraph
-    data = [{x: IndexOfDoList4096, y: TimeToDoList4096, type: 'line'}];
-    plotlib.plot(data);
-}
-
-//Why they're blank array??
-console.log(TimeToDoList4096);
-console.log(IndexOfDoList4096);
