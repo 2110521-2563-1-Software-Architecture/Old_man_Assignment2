@@ -9,6 +9,7 @@
 -----
 **Answer**
 1. Graph
+<img src='C:\Users\World\Desktop\SoftArc\Assignment2\Old_man_Assignment2\Answers\ExerciseC\GraphInC.PNG'>
 2. Discussion
 3. Comparision
 4.
