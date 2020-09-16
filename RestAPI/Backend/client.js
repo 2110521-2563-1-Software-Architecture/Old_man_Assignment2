@@ -50,11 +50,11 @@ if (command == "list") listBooks();
 
 //try doing loop 
 else if (command == "looplist"){
-    let start = Date.now();
+    let start = process.hrtime.bigint();
     for ( i = 0; i < 100; i++){
         listBooks();
     }
-    fs.writeFile('LoopList.txt', (Date.now() - start).toString(), function (err) {
+    fs.writeFile('LoopList.txt', (process.hrtime.bigint() - start).toString(), function (err) {
         if (err) throw err;
         console.log('LoopList saved');
     });
@@ -62,9 +62,9 @@ else if (command == "looplist"){
 
 //Use this command to insert a book in ข้อa)
 else if (command == "insert"){
-    let start = Date.now();
+    let start = process.hrtime.bigint();
     insertBook('a', 'b');
-    fs.writeFile('InsertOne.txt', (Date.now() - start).toString(), function (err) {
+    fs.writeFile('InsertOne.txt', (process.hrtime.bigint() - start).toString(), function (err) {
         if (err) throw err;
         console.log('InsertOne saved');
     });
@@ -72,11 +72,11 @@ else if (command == "insert"){
 
 //Use this command to insert many books in ข้อa)
 else if (command == "listinsert") {
-    let start = Date.now();
+    let start = process.hrtime.bigint();
     for (i = 0; i < 100; i++){
         insertBook('a', 'b');
     }
-    fs.writeFile('ListInsert.txt', (Date.now() - start).toString(), function (err) {
+    fs.writeFile('ListInsert.txt', (process.hrtime.bigint() - start).toString(), function (err) {
         if (err) throw err;
         console.log('ListInsert saved');
     });
@@ -86,10 +86,10 @@ else if (command == "listinsert") {
 //Call this in terminal1
 else if (command == "dolist4096") {  
     let data = '';
-    let start = Date.now()
+    let start = process.hrtime.bigint()
     for (i = 0; i < 4096; i++){
         listBooks();
-        data += (Date.now() - start).toString() + '\n';
+        data += (process.hrtime.bigint() - start).toString() + '\n';
     }
     fs.writeFile('list4096.txt', data, function (err) {
         if (err) throw err;
@@ -101,10 +101,10 @@ else if (command == "dolist4096") {
 //Call this in terminal2
 else if (command == "doinsert4096") {
     let data = '';
-    let start = Date.now()
+    let start = process.hrtime.bigint()
     for (i = 0; i < 4096; i++){
         insertBook('a','b');
-        data += (Date.now() - start).toString() + '\n';
+        data += (process.hrtime.bigint() - start).toString() + '\n';
     }
     fs.writeFile('insert4096.txt', data, function (err) {
         if (err) throw err;
@@ -116,10 +116,10 @@ else if (command == "doinsert4096") {
 //Call this in terminal3
 else if (command == "doget4096") {
     let data = '';
-    let start = Date.now()
+    let start = process.hrtime.bigint()
     for (i = 0; i < 4096; i++){
         getBook(i);
-        data += (Date.now() - start).toString() + '\n';
+        data += (process.hrtime.bigint() - start).toString() + '\n';
     }
     fs.writeFile('get4096.txt', data, function (err) {
         if (err) throw err;
@@ -127,25 +127,23 @@ else if (command == "doget4096") {
     });
 }
 
-// else if (command == "checktime"){
-//     for (i = 0; i < 10; i++) {
-//         console.log(TimeToDoGet4096[i]);
-//     } 
-// }
+//Use this command to get answers for c
 else if (command == "concurrentlist") {  
+    let data = '';
     const square = [
         1,2,4,8,16,32,64,128,256,512,1024,2048,4096
     ];
-    const time = []
-    for (i = 0; i < square.length; i++){
-        var start = Date.now();
+    for (i = 0; i < square.length; i++){ 
+        let start = process.hrtime.bigint();
         for (j = 0; j < square[i]; j++){
             listBooks();
         }
-        var end = Date.now();
-        time.push(end-start);
+        data += (process.hrtime.bigint() - start).toString() + '\n';
     }
-    console.log(time);
+    fs.writeFile('concurrentList.txt', data, function (err) {
+        if (err) throw err;
+        console.log('ConcurrentList saved');
+    });
 }
 
 else if (command == "get") getBook(process.argv[0]);
