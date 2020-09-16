@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "express": "^4.17.1",
+    "nodeplotlib": "^0.6.5",
     "socket.io": "^2.3.0",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4"

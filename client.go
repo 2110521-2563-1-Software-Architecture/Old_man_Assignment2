@@ -276,7 +276,6 @@ func doLoopList(ctx context.Context, args ...string) {
 		endtime := time.Now()
 		var x = subtractTime(starttime, endtime)
 		listTime[i] = x
-		fmt.Println(x)
 	}
 	fmt.Println(listTime)
 }
@@ -289,7 +288,6 @@ func doLoopList4096(ctx context.Context, args ...string) {
 		endtime := time.Now()
 		var x = subtractTime(starttime, endtime)
 		listTime[i] = x
-		fmt.Println(x)
 	}
 	fmt.Println(listTime)
 }
@@ -311,7 +309,6 @@ func doInsertList(ctx context.Context, args ...string) {
 		endtime := time.Now()
 		var x = subtractTime(starttime, endtime)
 		listTime[i] = x
-		fmt.Println(x)
 	}
 	fmt.Println(listTime)
 }
@@ -324,7 +321,6 @@ func doInsertList4096(ctx context.Context, args ...string) {
 		endtime := time.Now()
 		var x = subtractTime(starttime, endtime)
 		listTime[i] = x
-		fmt.Println(x)
 	}
 	fmt.Println(listTime)
 }
@@ -345,7 +341,6 @@ func doLoopGet(ctx context.Context, args ...string) {
 		endtime := time.Now()
 		var x = subtractTime(starttime, endtime)
 		listTime[i] = x
-		fmt.Println(x)
 	}
 	fmt.Println(listTime)
 }
@@ -358,7 +353,6 @@ func doLoopGet4096(ctx context.Context, args ...string) {
 		endtime := time.Now()
 		var x = subtractTime(starttime, endtime)
 		listTime[i] = x
-		fmt.Println(x)
 	}
 	fmt.Println(listTime)
 }
