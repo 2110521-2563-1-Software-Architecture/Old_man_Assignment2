@@ -6,6 +6,8 @@ const URL = 'http://localhost:3000';
 var processName = process.argv.shift();
 var scriptName = process.argv.shift();
 var command = process.argv.shift();
+var TimeToDoList4096 = [];
+var IndexOfDoList4096 = [];
 
 const listBooks = async () => {
     const res = await axios.get(`${URL}/list`);
@@ -82,13 +84,13 @@ else if (command == "listinsert") {
 //Use this command to list 4096 rounds in ข้อb)
 //Call this in terminal1
 else if (command == "dolist4096") {
-    var TimeToDoList4096 = [];
-    var IndexOfDoList4096 = [];
+    
     for (i = 0; i < 4096; i++){
         listBooks();
         TimeToDoList4096.push(Date.now()/1000);
         IndexOfDoList4096.push(i);
     }
+    console.log(IndexOfDoList4096);
 }
 
 //Use this command to insert 4096 rounds in ข้อb)
@@ -126,6 +128,10 @@ else if (command == "delete") deleteBook(process.argv[0]);
 else if (command == "watch") watchBooks();
 
 else if (command == "plot") {                                           //HowToPlotGraph
-    data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
+    data = [{x: IndexOfDoList4096, y: TimeToDoList4096, type: 'line'}];
     plotlib.plot(data);
 }
+
+//Why they're blank array??
+console.log(TimeToDoList4096);
+console.log(IndexOfDoList4096);
