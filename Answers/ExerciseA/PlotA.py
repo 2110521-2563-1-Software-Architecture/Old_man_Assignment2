@@ -1,29 +1,43 @@
 import matplotlib.pyplot as plt
-import numpy as np
+import os
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
-with open('GRPCInsertOne.txt') as g1:
-    lines = g1.readlines()
-    y1 = [float(line.split()[0])*1000 for line in lines]
+xaxis = [1,100]
+RestTime = []
+GRPCTime = []
 
-with open('GRPCInsert100.txt') as g2:
-    lines = g2.readlines()
-    y1.append([float(line.split()[0])*1000 for line in lines])
+Rest1 = open(os.path.join(THIS_FOLDER, 'RESTInsertOne.txt'),'r')
+GRPC1 = open(os.path.join(THIS_FOLDER, 'GRPCInsertOne.txt'), 'r')
+Rest2 = open(os.path.join(THIS_FOLDER, 'RESTInsert100.txt'),'r')
+GRPC2 = open(os.path.join(THIS_FOLDER, 'GRPCInsert100.txt'), 'r')
 
-with open('RESTInsertOne.txt') as r1:
-    lines = r1.readlines()
-    y2 = [float(line.split()[0])*1000 for line in lines]
+for line in Rest1:
+    time = line.strip()   
+    ftime = float(time)
+    RestTime.append(ftime/1000000)
 
-with open('RESTInsert100.txt') as r2:
-    lines = r2.readlines()
-    y2.append([float(line.split()[0])*1000 for line in lines])
+for line in Rest2:
+    time = line.strip()   
+    ftime = float(time)
+    RestTime.append(ftime/1000000)
 
-x = [1,100]
+for line in GRPC1:
+    time = line.strip()   
+    ftime = float(time)
+    GRPCTime.append(ftime*1000)
 
-plt.plot(x, y1, label='GRPC', color='g', marker='o')
-plt.plot(x, y2, label='REST', color='r', marker='o')
-plt.xlabel('Number of Insertion')
-plt.ylabel('Response Time (Microsecond)')
-plt.title('Graph A')
+for line in GRPC2:
+    time = line.strip()   
+    ftime = float(time)
+    GRPCTime.append(ftime*1000)
+
+plt.xlabel('Number of Call(s)')
+plt.ylabel('Response Time (millisec)')
+
+plt.plot(xaxis, RestTime , label = 'RestAPI') 
+plt.plot(xaxis, GRPCTime , label = 'GRPC') 
+
+plt.title('Comparison of Response Time in a)')
+
 plt.legend()
-plt.show()
-plt.savefig('GraphA.png')
+plt.show() 
