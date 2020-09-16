@@ -31,11 +31,11 @@ for line in GRPC2:
     ftime = float(time)
     GRPCTime.append(ftime*1000)
 
-plt.xlabel('Number of Call(s)')
+plt.xlabel('Number of Book(s)')
 plt.ylabel('Response Time (millisec)')
 
-plt.plot(xaxis, RestTime , label = 'RestAPI') 
-plt.plot(xaxis, GRPCTime , label = 'GRPC') 
+plt.plot(xaxis, GRPCTime , label = 'RestAPI') 
+plt.plot(xaxis, RestTime , label = 'GRPC') 
 
 plt.title('Comparison of Response Time in a)')
 

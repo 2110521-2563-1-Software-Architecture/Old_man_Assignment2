@@ -50,12 +50,12 @@ for line in GRPC3:
 plt.xlabel('Number of Call(s)')
 plt.ylabel('Response Time (millisec)')
 
-plt.plot(xaxis, RestGet , label = 'RestAPI Get')
-plt.plot(xaxis, RestInsert , label = 'RestAPI Insert') 
-plt.plot(xaxis, RestList , label = 'RestAPI List') 
-plt.plot(xaxis, GRPCGet , label = 'GRPC Get') 
-plt.plot(xaxis, GRPCInsert , label = 'GRPC Insert') 
-plt.plot(xaxis, GRPCList , label = 'GRPC List') 
+plt.plot(xaxis, GRPCGet , label = 'RestAPI Get')
+plt.plot(xaxis, GRPCInsert , label = 'RestAPI Insert') 
+plt.plot(xaxis, GRPCList , label = 'RestAPI List') 
+plt.plot(xaxis, RestGet , label = 'GRPC Get') 
+plt.plot(xaxis, RestInsert , label = 'GRPC Insert') 
+plt.plot(xaxis, RestList , label = 'GRPC List') 
 
 plt.title('Comparison of Response Time in b)')
 
